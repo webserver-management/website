@@ -1,13 +1,17 @@
 module.exports = {
-  purge: [
-    './resources/views/**/*.blade.php',
-    './resources/css/**/*.css',
-  ],
-  theme: {
-    extend: {}
-  },
-  variants: {},
-  plugins: [
-    require('@tailwindcss/ui'),
-  ]
+    purge: [
+        './resources/views/**/*.blade.php',
+        './resources/css/**/*.css',
+    ],
+    theme: {
+        extend: {
+            fontFamily: {
+                // sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+            }
+        }
+    },
+    variants: {},
+    plugins: [
+        require('@tailwindcss/ui'),
+    ]
 }
