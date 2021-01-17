@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>webserver.management</title>
+    <meta name="description" content="Free web server provisioning and management ✓ PHP ✓ MySQL ✓ SSL">
 
     <!-- Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
