@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('install.sh', function () {
+    $file = Cache::remember('install', 3600, function () {
+        return file_get_contents('https://raw.githubusercontent.com/webserver-management/app/master/install/install.sh');
+    });
+
+    return response($file)
+        ->header('Content-Type', 'text/plain');
 });

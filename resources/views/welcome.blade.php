@@ -301,7 +301,6 @@
                 <span class="block">Ready in minutes.</span>
             </h2>
             <p class="mt-4 text-lg leading-6 text-green-200">Run the command in the terminal of your fresh <strong>Ubuntu 20.04</strong> server</p>
-            <p class="text-red-800 font-bold text-2xl mt-5">This does not work yet!</p>
             <code class="bg-gray-800 p-3 text-white rounded block mt-5 break-all">curl https://webserver.management/install.sh | bash</code>
             <button type="button" class="mt-5 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-green-500 bg-white hover:bg-green-50 sm:w-auto" @click="$clipboard('curl https://webserver.management/install.sh | bash')">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
