@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@0.1.x/dist/alpine-clipboard.umd.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 </head>
 <body class="bg-gray-100 h-screen antialiased font-sans">
     <div class="bg-gray-50">
@@ -38,17 +41,17 @@
                 </div>
             </div>
 
-            <div class="relative pt-6 pb-16 sm:pb-24">
+            <div class="relative pt-6 pb-16 sm:pb-24" x-data="{ open: false }">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6">
                     <nav class="relative flex items-center justify-between sm:h-10 md:justify-center" aria-label="Global">
                         <div class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
                             <div class="flex items-center justify-between w-full md:w-auto">
-                                <a href="#">
+                                <a href="/">
                                     <span class="sr-only">webserver.management</span>
-                                    <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
+                                    <svg class="h-8 w-auto sm:h-10 fill-current text-green-500" enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path d="m21.25 0h-18.5c-1.517 0-2.75 1.233-2.75 2.75v4.25h24v-4.25c0-1.517-1.233-2.75-2.75-2.75zm-6.75 5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm5 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/><path d="m0 9v6h24v-6zm14.5 4.5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm5 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/><path d="m0 17v4.25c0 1.517 1.233 2.75 2.75 2.75h18.5c1.517 0 2.75-1.233 2.75-2.75v-4.25zm14.5 5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm5 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/></g></svg>
                                 </a>
                                 <div class="-mr-2 flex items-center md:hidden">
-                                    <button type="button" class="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" id="main-menu" aria-haspopup="true">
+                                    <button @click="open = true" type="button" class="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500" id="main-menu" aria-haspopup="true">
                                         <span class="sr-only">Open main menu</span>
                                         <!-- Heroicon name: menu -->
                                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -65,29 +68,19 @@
 
                             <a href="#faq" class="font-medium text-gray-500 hover:text-gray-900">FAQ</a>
 
-                            <a href="https://github.com/webserver-management" class="font-medium text-gray-500 hover:text-gray-900">Github</a>
+                            <a href="https://github.com/webserver-management" target="_blank" class="font-medium text-gray-500 hover:text-gray-900 flex">Github <svg class="w-6 h-6 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
                         </div>
                     </nav>
                 </div>
 
-                <!--
-                    Mobile menu, show/hide based on menu open state.
-
-                    Entering: "duration-150 ease-out"
-                        From: "opacity-0 scale-95"
-                        To: "opacity-100 scale-100"
-                    Leaving: "duration-100 ease-in"
-                        From: "opacity-100 scale-100"
-                        To: "opacity-0 scale-95"
-                -->
-                <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+                <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden" x-show="open" x-description="Mobile menu, show/hide based on menu open state." x-transition:enter="duration-150 ease-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="duration-100 ease-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
                     <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div class="px-5 pt-4 flex items-center justify-between">
                             <div>
-                                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
+                                <svg class="h-8 w-auto fill-current text-green-500" enable-background="new 0 0 24 24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path d="m21.25 0h-18.5c-1.517 0-2.75 1.233-2.75 2.75v4.25h24v-4.25c0-1.517-1.233-2.75-2.75-2.75zm-6.75 5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm5 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/><path d="m0 9v6h24v-6zm14.5 4.5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm5 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/><path d="m0 17v4.25c0 1.517 1.233 2.75 2.75 2.75h18.5c1.517 0 2.75-1.233 2.75-2.75v-4.25zm14.5 5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm5 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/></g></svg>
                             </div>
                             <div class="-mr-2">
-                                <button type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                <button @click="open = false" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
                                     <span class="sr-only">Close main menu</span>
                                     <!-- Heroicon name: x -->
                                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -104,7 +97,7 @@
 
                                 <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" role="menuitem">FAQ</a>
 
-                                <a href="https://github.com/webserver-management" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" role="menuitem">Github</a>
+                                <a href="https://github.com/webserver-management" target="_blank" class="flex px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" role="menuitem">Github <svg class="w-6 h-6 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>
                             </div>
                         </div>
                     </div>
@@ -114,7 +107,7 @@
                     <div class="text-center">
                         <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                             <span class="block">Free web server provisioning</span>
-                            <span class="block text-indigo-600">and management</span>
+                            <span class="block text-green-500">and management</span>
                         </h1>
                         <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
                             Install easily with one command within minutes
@@ -128,7 +121,8 @@
                     <div class="flex-1 w-full bg-gray-800"></div>
                 </div>
                 <div class="max-w-7xl mx-auto px-4 sm:px-6">
-                    <img class="relative rounded-lg shadow-lg" src="https://tailwindui.com/img/component-images/top-nav-with-multi-column-layout-screenshot.jpg" alt="App screenshot">
+                    <img class="relative rounded-lg shadow-lg blur" src="https://tailwindui.com/img/component-images/top-nav-with-multi-column-layout-screenshot.jpg" alt="App screenshot">
+                    <div class="absolute top-0 left-0 right-0 font-bold text-center mt-12 text-4xl sm:mt-28 sm:text-8xl">Soon...</div>
                 </div>
             </div>
         </div>
@@ -137,19 +131,19 @@
                 <h2 class="text-center text-gray-400 text-sm font-semibold uppercase tracking-wide">Works with all providers</h2>
                 <div class="mt-8 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
                     <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                        <img class="h-12" src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg" alt="Tuple">
+                        <img class="h-12" src="/img/icons/digitalocean.svg" alt="Digital Ocean">
                     </div>
                     <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                        <img class="h-12" src="https://tailwindui.com/img/logos/mirage-logo-gray-400.svg" alt="Mirage">
+                        <img class="h-12" src="/img/icons/linode.svg" alt="Linode">
                     </div>
                     <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                        <img class="h-12" src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg" alt="StaticKit">
+                        <img class="h-12" src="/img/icons/google-cloud.svg" alt="Google Cloud">
                     </div>
                     <div class="col-span-1 flex justify-center md:col-span-3 lg:col-span-1">
-                        <img class="h-12" src="https://tailwindui.com/img/logos/transistor-logo-gray-400.svg" alt="Transistor">
+                        <img class="h-12" src="/img/icons/aws.svg" alt="Amazon Web Services">
                     </div>
                     <div class="col-span-2 flex justify-center md:col-span-3 lg:col-span-1">
-                        <img class="h-12" src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg" alt="Workcation">
+                        <img class="h-12" src="/img/icons/hetzner.svg" alt="Hetzner">
                     </div>
                 </div>
             </div>
@@ -159,9 +153,9 @@
     <div class="bg-white" id="features">
         <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
             <div>
-                <h2 class="text-base font-semibold text-indigo-600 uppercase tracking-wide">Everything you need</h2>
+                <h2 class="text-base font-semibold text-green-500 uppercase tracking-wide">Everything you need</h2>
                 <p class="mt-2 text-3xl font-extrabold text-gray-900">All-in-one platform</p>
-                <p class="mt-4 text-lg text-gray-500">Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla nec.</p>
+                <p class="mt-4 text-lg text-gray-500">We provision your server with the best software and support of the community.</p>
             </div>
             <div class="mt-12 lg:mt-0 lg:col-span-2">
                 <dl class="space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:grid-rows-4 sm:grid-flow-col sm:gap-x-6 sm:gap-y-10 lg:gap-x-8">
@@ -175,7 +169,7 @@
                                 PHP version of your choice
                             </dt>
                             <dd class="mt-2 text-base text-gray-500">
-                                Lorem ipsum...
+                                7.3, 7.4 or 8.0
                             </dd>
                         </div>
                     </div>
@@ -190,7 +184,7 @@
                                 Free SSL certificates
                             </dt>
                             <dd class="mt-2 text-base text-gray-500">
-                                Lorem ipsum...
+                                With Let's Encrypt
                             </dd>
                         </div>
                     </div>
@@ -205,7 +199,7 @@
                                 MySQL
                             </dt>
                             <dd class="mt-2 text-base text-gray-500">
-                                Lorem ipsum...
+                                5.7 or 8.0
                             </dd>
                         </div>
                     </div>
@@ -220,7 +214,7 @@
                                 NPM / Yarn
                             </dt>
                             <dd class="mt-2 text-base text-gray-500">
-                                Lorem ipsum...
+                                Handled with NVM
                             </dd>
                         </div>
                     </div>
@@ -235,7 +229,7 @@
                                 Composer
                             </dt>
                             <dd class="mt-2 text-base text-gray-500">
-                                Lorem ipsum...
+                                1 or 2
                             </dd>
                         </div>
                     </div>
@@ -250,7 +244,7 @@
                                 Auto security updates
                             </dt>
                             <dd class="mt-2 text-base text-gray-500">
-                                Lorem ipsum...
+                                All taken care of
                             </dd>
                         </div>
                     </div>
@@ -265,7 +259,7 @@
                                 HTTP2
                             </dt>
                             <dd class="mt-2 text-base text-gray-500">
-                                Lorem ipsum...
+                                To be blazing fast
                             </dd>
                         </div>
                     </div>
@@ -280,7 +274,7 @@
                                 Redis
                             </dt>
                             <dd class="mt-2 text-base text-gray-500">
-                                Lorem ipsum...
+                                For caching
                             </dd>
                         </div>
                     </div>
@@ -289,18 +283,19 @@
         </div>
     </div>
 
-    <div class="bg-indigo-700" id="install">
+    <div class="bg-green-500" id="install">
         <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
                 <span class="block">Install now!</span>
                 <span class="block">Ready in minutes.</span>
             </h2>
-            <p class="mt-4 text-lg leading-6 text-indigo-200">Run the command in the terminal of your fresh <strong>Ubuntu 20.04</strong> server</p>
-            <p class="text-red-700 font-bold text-2xl mt-5">This does not work yet!</p>
-            <code class="bg-gray-800 p-3 text-white rounded inline-block mt-5">curl https://webserver.management/install.sh | bash</code>
-            <a href="#" class="mt-5 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto">
-                Or let us do it
-            </a>
+            <p class="mt-4 text-lg leading-6 text-green-200">Run the command in the terminal of your fresh <strong>Ubuntu 20.04</strong> server</p>
+            <p class="text-red-800 font-bold text-2xl mt-5">This does not work yet!</p>
+            <code class="bg-gray-800 p-3 text-white rounded block mt-5 break-all">curl https://webserver.management/install.sh | bash</code>
+            <button type="button" class="mt-5 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-green-500 bg-white hover:bg-green-50 sm:w-auto" @click="$clipboard('curl https://webserver.management/install.sh | bash')">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                Copy to clipboard
+            </button>
         </div>
     </div>
 
@@ -316,7 +311,7 @@
                             Why is it free?
                         </dt>
                         <dd class="mt-2 text-base text-gray-500">
-                            I don&#039;t know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
+                            So we can build the best server provisioning and management tool together with the community.
                         </dd>
                     </div>
 
@@ -325,43 +320,25 @@
                             Is it secure?
                         </dt>
                         <dd class="mt-2 text-base text-gray-500">
-                            Because they&#039;re so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
+                            Absolutely! We configure security updates, a firewall and SSH best practices. Besides that; it's open source so you can see exactly what and how things are configured.
                         </dd>
                     </div>
 
                     <div>
                         <dt class="text-lg leading-6 font-medium text-gray-900">
-                            How do you make holy water?
+                            I want ... on my server!
                         </dt>
                         <dd class="mt-2 text-base text-gray-500">
-                            You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
+                            Alright; open up an <a class="underline hover:no-underline" href="https://github.com/webserver-management/app/issues" target="_blank">issue</a> or <a class="underline hover:no-underline" href="https://github.com/webserver-management/app/pulls" target="_blank">pull request</a> and let's see what we can do!
                         </dd>
                     </div>
 
                     <div>
                         <dt class="text-lg leading-6 font-medium text-gray-900">
-                            Why can&#039;t you hear a pterodactyl go to the bathroom?
+                            You're doing it wrong, ... is much better!
                         </dt>
                         <dd class="mt-2 text-base text-gray-500">
-                            Because the pee is silent. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
-                        </dd>
-                    </div>
-
-                    <div>
-                        <dt class="text-lg leading-6 font-medium text-gray-900">
-                            What do you call someone with no body and no nose?
-                        </dt>
-                        <dd class="mt-2 text-base text-gray-500">
-                            Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
-                        </dd>
-                    </div>
-
-                    <div>
-                        <dt class="text-lg leading-6 font-medium text-gray-900">
-                            Why did the invisible man turn down the job offer?
-                        </dt>
-                        <dd class="mt-2 text-base text-gray-500">
-                            He couldn&#039;t see himself doing it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
+                            Cool, help us with a <a class="underline hover:no-underline" href="https://github.com/webserver-management/app/pulls" target="_blank">pull request</a> to archive the same if you would like to have that for free.
                         </dd>
                     </div>
                 </dl>
@@ -372,7 +349,7 @@
     <footer class="bg-white border-t">
         <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
             <div class="flex justify-center space-x-6 md:order-2">
-                <a href="https://github.com/webserver-management" class="text-gray-400 hover:text-gray-500">
+                <a href="https://github.com/webserver-management" target="_blank" class="text-gray-400 hover:text-gray-500">
                     <span class="sr-only">GitHub</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
@@ -381,12 +358,10 @@
             </div>
             <div class="mt-8 md:mt-0 md:order-1">
                 <p class="text-center text-base text-gray-400">
-                    &copy; 2020 Roy Duineveld. All rights reserved.
+                    &copy; 2020 Roy Duineveld. All rights reserved. Logo by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect" class="hover:underline">Pixel perfect</a>
                 </p>
             </div>
         </div>
     </footer>
-
-
 </body>
 </html>
